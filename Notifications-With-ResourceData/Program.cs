@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graph;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -16,7 +17,16 @@ namespace DemoApp
             var authProvider = AuthSettings.isUserAuthentication ? (MyAuthenticationProvider)new UserAuthenticationProvider() : (MyAuthenticationProvider)new AppOnlyAuthenticationProvider();
             GraphServiceClient client = GetAuthenticatedClient(authProvider);
             var token = authProvider.GetAccessTokenAsync().Result;
-            var users = client.Users.Request().GetAsync().Result;
+
+            var sub = new Subscription();
+            sub.AdditionalData = new Dictionary<string, object>();
+            sub.AdditionalData.Add("lifecycleNotificationUrl", "https://microsoft.com");
+            sub.ChangeType = "updated";
+            sub.NotificationUrl = "https://testfunctionsforwebhooks.azurewebsites.net/api/GenericNotificationLogger?code=tp3zPZP/TFIXt7Vz67ESQgapfnG4YTqhdjxWUw8GxYSzQFQqCdwgnQ==";
+            sub.Resource = "/users";
+            sub.ExpirationDateTime = DateTimeOffset.UtcNow + TimeSpan.FromDays(1);
+            sub.ClientState = "bob";
+            var res = client.Subscriptions.Request().AddAsync(sub).Result;
 
             return;
         }
