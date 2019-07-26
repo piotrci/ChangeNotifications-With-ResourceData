@@ -16,7 +16,7 @@ namespace DemoApp
             var authProvider = AuthSettings.isUserAuthentication ? (MyAuthenticationProvider)new UserAuthenticationProvider() : (MyAuthenticationProvider)new AppOnlyAuthenticationProvider();
             GraphServiceClient client = GetAuthenticatedClient(authProvider);
 
-
+            return;
         }
 
         private static readonly string microsoftGraphV1 = @"https://graph.microsoft.com/v1.0";

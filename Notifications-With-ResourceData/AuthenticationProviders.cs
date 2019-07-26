@@ -36,17 +36,17 @@ namespace DemoApp
     }
     class UserAuthenticationProvider : MyAuthenticationProvider
     {
-        private PublicClientApplication app;
+        private IPublicClientApplication app;
         private IAccount account;
         async protected override Task<string> GetTokenSilentlyAsync()
         {
-            return (await this.app.AcquireTokenSilentAsync(AuthSettings.scopes, this.account)).AccessToken;
+            return (await this.app.AcquireTokenSilent(AuthSettings.scopes, this.account).ExecuteAsync()).AccessToken;
         }
 
         protected override string InitializeAppAndGetFirstToken()
         {
-            this.app = new PublicClientApplication(AuthSettings.applicationId, "https://login.microsoftonline.com/organizations/", new TokenCache());
-            var authResult = this.app.AcquireTokenAsync(AuthSettings.scopes).Result;
+            this.app = PublicClientApplicationBuilder.Create(AuthSettings.applicationId).Build();
+            var authResult = this.app.AcquireTokenInteractive(AuthSettings.scopes).ExecuteAsync().Result;
             this.account = authResult.Account;
             return authResult.AccessToken;
         }
@@ -54,16 +54,17 @@ namespace DemoApp
     class AppOnlyAuthenticationProvider : MyAuthenticationProvider
     {
         private readonly static string[] scopes = new[] { "https://graph.microsoft.com/.default" };
-        private ConfidentialClientApplication app;
+        private IConfidentialClientApplication app;
 
         async protected override Task<string> GetTokenSilentlyAsync()
         {
-            return (await this.app.AcquireTokenForClientAsync(scopes)).AccessToken;
+            return (await this.app.AcquireTokenForClient(scopes).ExecuteAsync()).AccessToken;
         }
 
         protected override string InitializeAppAndGetFirstToken()
         {
-            this.app = new ConfidentialClientApplication(AuthSettings.applicationId, $"https://login.microsoftonline.com/{AuthSettings.tenantId}", "https://microsoft.com", AuthSettings.secretClientCredentials, null, new TokenCache());
+            this.app = ConfidentialClientApplicationBuilder.Create(AuthSettings.applicationId).WithAuthority($"https://login.microsoftonline.com/{AuthSettings.tenantId}").WithClientSecret(AuthSettings.secretClientCredentials).Build();
+            //this.app = new ConfidentialClientApplication(AuthSettings.applicationId, $"https://login.microsoftonline.com/{AuthSettings.tenantId}", "https://microsoft.com", AuthSettings.secretClientCredentials, null, new TokenCache());
             return GetTokenSilentlyAsync().Result;
         }
     }
