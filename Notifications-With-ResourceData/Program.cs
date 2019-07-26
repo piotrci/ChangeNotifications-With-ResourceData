@@ -16,6 +16,8 @@ namespace DemoApp
             var authProvider = AuthSettings.isUserAuthentication ? (MyAuthenticationProvider)new UserAuthenticationProvider() : (MyAuthenticationProvider)new AppOnlyAuthenticationProvider();
             GraphServiceClient client = GetAuthenticatedClient(authProvider);
 
+            var users = client.Users.Request().GetAsync().Result;
+
             return;
         }
 
