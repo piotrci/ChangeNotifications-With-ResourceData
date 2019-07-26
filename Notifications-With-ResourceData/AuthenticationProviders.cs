@@ -53,7 +53,9 @@ namespace DemoApp
     }
     class AppOnlyAuthenticationProvider : MyAuthenticationProvider
     {
-        private readonly static string[] scopes = new[] { "https://graph.microsoft.com/.default" };
+        private readonly static string graphCanary = "https://canary.graph.microsoft.com";
+        private readonly static string graphProd = "https://graph.microsoft.com";
+        private readonly static string[] scopes = new[] { $"{graphCanary}/.default" };
         private IConfidentialClientApplication app;
 
         async protected override Task<string> GetTokenSilentlyAsync()
