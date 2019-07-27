@@ -3,13 +3,13 @@
 namespace DemoApp
 {
     /// <summary>
-    /// This class stores your SECRET app and tenat details to be used for authentication.
+    /// This class stores your private settings related to notification handling.
     /// Make sure not to include this in your Git repo!
     /// 
-    /// Use the auto-create AuthSettingsLocal.cs to implement a static constructor that initializes the fields defined here. e.g.
-    /// static AuthSettings()
+    /// Use the auto-create NotificationProcessingSettingsLocal.cs to implement a static constructor that initializes the fields defined here. e.g.
+    /// static NotificationProcessingSettings()
     /// {
-    ///     applicationId = <the actual id>
+    ///     notificationUrl = <your url>
     ///     etc.
     /// }
     /// </summary>
