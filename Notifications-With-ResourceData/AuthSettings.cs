@@ -1,11 +1,4 @@
-﻿using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DemoApp
+﻿namespace DemoApp
 {
     /// <summary>
     /// This class stores your SECRET app and tenat details to be used for authentication.

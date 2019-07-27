@@ -72,8 +72,11 @@
     <Compile Include="AuthenticationProviders.cs" />
     <Compile Include="AuthSettings.cs" />
     <Compile Include="AuthSettingsLocal.cs" />
+    <Compile Include="NotificationProcessingSettings.cs" />
+    <Compile Include="NotificationProcessingSettingsLocal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubscriptionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

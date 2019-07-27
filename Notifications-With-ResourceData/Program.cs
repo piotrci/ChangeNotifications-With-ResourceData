@@ -18,15 +18,15 @@ namespace DemoApp
             GraphServiceClient client = GetAuthenticatedClient(authProvider);
             var token = authProvider.GetAccessTokenAsync().Result;
 
-            var sub = new Subscription();
-            sub.AdditionalData = new Dictionary<string, object>();
-            sub.AdditionalData.Add("lifecycleNotificationUrl", "https://microsoft.com");
-            sub.ChangeType = "updated";
-            sub.NotificationUrl = "https://testfunctionsforwebhooks.azurewebsites.net/api/GenericNotificationLogger?code=tp3zPZP/TFIXt7Vz67ESQgapfnG4YTqhdjxWUw8GxYSzQFQqCdwgnQ==";
-            sub.Resource = "/users";
-            sub.ExpirationDateTime = DateTimeOffset.UtcNow + TimeSpan.FromDays(1);
-            sub.ClientState = "bob";
-            var res = client.Subscriptions.Request().AddAsync(sub).Result;
+            var subManager = new SubscriptionManager(client, NotificationProcessingSettings.notificationUrl, NotificationProcessingSettings.lifecycleNotificationUrl);
+
+            var subs = subManager.GetAllSubscriptionsAsync().Result;
+
+            //subManager.DeleteAllSubscriptionsAsync().Wait();
+
+            var createdSub = subManager.CreateSubscriptionAsync("/users", "updated", "bobState").Result;
+
+            
 
             return;
         }
