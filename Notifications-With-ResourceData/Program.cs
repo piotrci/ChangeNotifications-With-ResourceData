@@ -12,6 +12,11 @@ namespace DemoApp
     {
         static void Main(string[] args)
         {
+            var p = new NotificationProcessor(System.IO.File.ReadAllText("SampleNotifications/UnencryptedRichNotification.json"));
+            p.ValidateAllTokens();
+            return;
+
+
             //KeyGeneration.GenerateKey();
             //return;
             // set up authentication based on the config specified in AuthSettings.cs (you should have a local git-ignoder AuthSettingsLocal.cs file where you initialize the values
