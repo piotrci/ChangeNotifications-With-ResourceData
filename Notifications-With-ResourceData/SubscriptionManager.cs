@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,11 +31,25 @@ namespace DemoApp
             this.notificationUrl = notificationUrl;
             this.lifeCycleNotificationUrl = lifeCycleNotificationUrl;
         }
-        async public Task<Subscription> CreateSubscriptionAsync(string graphResource, string changeType, TimeSpan duration, string clientState)
+        async public Task<Subscription> CreateSubscriptionAsync(string graphResource, string changeType, TimeSpan duration, string clientState, string encryptionKey, string encryptionKeyId, bool includeProperties = false)
         {
             var sub = new Subscription();
             sub.AdditionalData = new Dictionary<string, object>();
             sub.AdditionalData.Add("lifecycleNotificationUrl", this.lifeCycleNotificationUrl);
+            if (includeProperties)
+            {
+                sub.AdditionalData.Add("includeProperties", includeProperties);
+                if (String.IsNullOrEmpty(encryptionKey))
+                {
+                    throw new ArgumentNullException(nameof(encryptionKey), $"{nameof(encryptionKey)} must be set when {includeProperties} is set to true.");
+                }
+                if (String.IsNullOrEmpty(encryptionKeyId))
+                {
+                    throw new ArgumentNullException(nameof(encryptionKeyId), $"{nameof(encryptionKeyId)} must be set when {includeProperties} is set to true.");
+                }
+                sub.AdditionalData.Add("publicEncryptionKey", encryptionKey);
+                sub.AdditionalData.Add("publicEncryptionKeyId", encryptionKeyId);
+            }
             sub.ChangeType = changeType;
             sub.NotificationUrl = this.notificationUrl;
             sub.Resource = graphResource;
@@ -44,7 +59,7 @@ namespace DemoApp
         }
         async public Task<Subscription> CreateSubscriptionAsync(string graphResource, string changeType, string clientState)
         {
-            return await CreateSubscriptionAsync(graphResource, changeType, TimeSpan.FromDays(2), clientState);
+            return await CreateSubscriptionAsync(graphResource, changeType, TimeSpan.FromDays(2), clientState, null, null);
         }
 
         async public Task DeleteAllSubscriptionsAsync()
