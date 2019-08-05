@@ -12,7 +12,10 @@ namespace DemoApp
     {
         static void Main(string[] args)
         {
-            var p = new NotificationProcessor(System.IO.File.ReadAllText("SampleNotifications/UnencryptedRichNotification.json"));
+            //goto subscription;
+            goto tokens;
+
+            tokens:  var p = new NotificationProcessor(System.IO.File.ReadAllText("SampleNotifications/UnencryptedRichNotification.json"));
             p.ValidateAllTokens();
             return;
 
@@ -20,7 +23,7 @@ namespace DemoApp
             //KeyGeneration.GenerateKey();
             //return;
             // set up authentication based on the config specified in AuthSettings.cs (you should have a local git-ignoder AuthSettingsLocal.cs file where you initialize the values
-            var authProvider = AuthSettings.isUserAuthentication ? (MyAuthenticationProvider)new UserAuthenticationProvider() : (MyAuthenticationProvider)new AppOnlyAuthenticationProvider();
+            subscription:  var authProvider = AuthSettings.isUserAuthentication ? (MyAuthenticationProvider)new UserAuthenticationProvider() : (MyAuthenticationProvider)new AppOnlyAuthenticationProvider();
             GraphServiceClient client = GetAuthenticatedClient(authProvider);
             var token = authProvider.GetAccessTokenAsync().Result;
 

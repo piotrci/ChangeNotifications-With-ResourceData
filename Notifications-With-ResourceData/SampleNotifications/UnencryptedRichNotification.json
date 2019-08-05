@@ -1,25 +1,25 @@
 {
   "value": [
     {
-      "subscriptionId": "0fd75d43-787b-433b-8474-ffb3c2bb75b9",
+      "subscriptionId": "76222963-cc7b-42d2-882d-8aaa69cb2ba3",
       "changeType": "created",
       "tenantId": "2bcd9dfb-6a66-4236-98f9-e8fe4a675323",
       "clientState": "bobState",
-      "subscriptionExpirationDateTime": "2019-08-02T21:49:15.5120001+00:00",
-      "resource": "teams('d29828b8-c04d-4e2a-b2f6-07da6982f0f0')/channels('19:f127a8c55ad949d1a238464d22f0f99e@thread.skype')/messages('1564775335367')/replies('1564779124263')",
+      "subscriptionExpirationDateTime": "2019-08-05T23:50:01.8509239+00:00",
+      "resource": "teams('d29828b8-c04d-4e2a-b2f6-07da6982f0f0')/channels('19:f127a8c55ad949d1a238464d22f0f99e@thread.skype')/messages('1565045424600')/replies('1565045614572')",
       "resourceData": {
-        "id": "1564779124263",
-        "replyToId": "1564775335367",
-        "etag": "1564779124263",
+        "id": "1565045614572",
+        "replyToId": "1565045424600",
+        "etag": "1565045614572",
         "messageType": "message",
-        "createdDateTime": "2019-08-02T20:52:04Z",
+        "createdDateTime": "2019-08-05T22:53:34Z",
         "lastModifiedDateTime": null,
         "deletedDateTime": null,
         "subject": null,
         "summary": null,
         "importance": "normal",
         "locale": "en-us",
-        "webUrl": "https://teams.microsoft.com/l/message/19%3Af127a8c55ad949d1a238464d22f0f99e%40thread.skype/1564779124263?groupId=d29828b8-c04d-4e2a-b2f6-07da6982f0f0&tenantId=2bcd9dfb-6a66-4236-98f9-e8fe4a675323&createdTime=1564779124000&parentMessageId=1564775335367",
+        "webUrl": "https://teams.microsoft.com/l/message/19%3Af127a8c55ad949d1a238464d22f0f99e%40thread.skype/1565045614572?groupId=d29828b8-c04d-4e2a-b2f6-07da6982f0f0&tenantId=2bcd9dfb-6a66-4236-98f9-e8fe4a675323&createdTime=1565045614000&parentMessageId=1565045424600",
         "from": {
           "application": null,
           "device": null,
@@ -32,7 +32,7 @@
         },
         "body": {
           "contentType": "text",
-          "content": "new sub test"
+          "content": "hello again"
         },
         "attachments": [],
         "mentions": [],
@@ -41,9 +41,9 @@
         "replies": [],
         "hostedContents": [],
         "@odata.type": "#Microsoft.Graph.ChatMessage",
-        "@odata.id": "teams('d29828b8-c04d-4e2a-b2f6-07da6982f0f0')/channels('19:f127a8c55ad949d1a238464d22f0f99e@thread.skype')/messages('1564775335367')/replies('1564779124263')"
+        "@odata.id": "teams('d29828b8-c04d-4e2a-b2f6-07da6982f0f0')/channels('19:f127a8c55ad949d1a238464d22f0f99e@thread.skype')/messages('1565045424600')/replies('1565045614572')"
       }
     }
   ],
-  "validationTokens": [ "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InU0T2ZORlBId0VCb3NIanRyYXVPYlY4NExuWSIsImtpZCI6InU0T2ZORlBId0VCb3NIanRyYXVPYlY4NExuWSJ9.eyJhdWQiOiI4ZTQ2MDY3Ni1hZTNmLTRiMWUtODc5MC1lZTBmYjVkNjE0OGYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8yYmNkOWRmYi02YTY2LTQyMzYtOThmOS1lOGZlNGE2NzUzMjMvIiwiaWF0IjoxNTY0NzY2OTk0LCJuYmYiOjE1NjQ3NjY5OTQsImV4cCI6MTU2NDc5NjA5NCwiYWlvIjoiNDJGZ1lEQ1JmcS9WVVh6c1cxbEM2WlRTMUxseEFBPT0iLCJhcHBpZCI6IjBiZjMwZjNiLTRhNTItNDhkZi05YTgyLTIzNDkxMGM0YTA4NiIsImFwcGlkYWNyIjoiMiIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzJiY2Q5ZGZiLTZhNjYtNDIzNi05OGY5LWU4ZmU0YTY3NTMyMy8iLCJ0aWQiOiIyYmNkOWRmYi02YTY2LTQyMzYtOThmOS1lOGZlNGE2NzUzMjMiLCJ1dGkiOiJBR1o0R05TTlZrVzExWGZ4emtVakFBIiwidmVyIjoiMS4wIn0.XW7p_9NN18HTonSV8CS5C9qbDZ9icUGo9OMKP4zMhLwFt52hpBv5_V7Np9bzyIMC1beuzkTqf0UcSDTUiQBtgQMtqzflxjXgG7bP1H1tGBV-uVo0hhRarq1bL6SnUuCrksg1PMIWKvQkKyHOPgk8WY1ii-9VjbXL7kk3kpRJTTediQQTR4QYt-gsqY6RA3THnV1RxZKq-tg94OfyLB3JCrGOcfk5FeTdUMZtUr_Z5XVxDO1ftpUPv651P5NtdZACIFm_7i2jtYIx8LP3mz2jYWZYAfXsqIbDB28abZqPYgao0haSTaGw2T7Z6GvRWq9r4e2gD0yvZ2dOjrfETO-Iaw" ]
+  "validationTokens": [ "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InU0T2ZORlBId0VCb3NIanRyYXVPYlY4NExuWSIsImtpZCI6InU0T2ZORlBId0VCb3NIanRyYXVPYlY4NExuWSJ9.eyJhdWQiOiI4ZTQ2MDY3Ni1hZTNmLTRiMWUtODc5MC1lZTBmYjVkNjE0OGYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8yYmNkOWRmYi02YTY2LTQyMzYtOThmOS1lOGZlNGE2NzUzMjMvIiwiaWF0IjoxNTY1MDQ1MTMwLCJuYmYiOjE1NjUwNDUxMzAsImV4cCI6MTU2NTA3NDIzMCwiYWlvIjoiNDJGZ1lDaFlJdXpmNGJqc2FXamZjOVZUTDRPNEFRPT0iLCJhcHBpZCI6IjBiZjMwZjNiLTRhNTItNDhkZi05YTgyLTIzNDkxMGM0YTA4NiIsImFwcGlkYWNyIjoiMiIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzJiY2Q5ZGZiLTZhNjYtNDIzNi05OGY5LWU4ZmU0YTY3NTMyMy8iLCJ0aWQiOiIyYmNkOWRmYi02YTY2LTQyMzYtOThmOS1lOGZlNGE2NzUzMjMiLCJ1dGkiOiJqaVJPeGlLVTdFZXFidkZwUzBocEFBIiwidmVyIjoiMS4wIn0.oI5qc2fcyr3F6Qe6V9e5PfFBE4I1OvwA6WMgPbVGlHOuEDEgKYe0Fgklvi1Nni45soseXjR-3ibxxjhwphOI0m6CJSWRzcfWhEg-bHiyQvX-ks1x-UnyVsWfHZKiJeE0YvsTxdppJbEjz7T_T3obH51sJrZIYFy9YybKAtwvMeQYzGvHejWt-qf6TpXJqlAnqHlLnhhWZxDQnKFlgZUiRXSwSdJtFWYOEgs80CyqhNBYsk_lVrzJRWKL8qNVCNvbiWpQ06jtw9AQEVkcAgou1v7AZCDt5d8x7VWVeBL5zwR3NLVPXR4jBjXYeP0VPvB44YKbVnBNOmnhYPC79-8CJQ" ]
 }
