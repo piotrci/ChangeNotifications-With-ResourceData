@@ -6,6 +6,7 @@
 # Local Auth settings file with secrets
 AuthSettingsLocal.cs
 NotificationProcessingSettingsLocal.cs
+DummyKeyStoreLocal.cs
 
 # User-specific files
 *.suo

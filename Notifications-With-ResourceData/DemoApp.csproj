@@ -98,6 +98,8 @@
     <Compile Include="AuthenticationProviders.cs" />
     <Compile Include="AuthSettings.cs" />
     <Compile Include="AuthSettingsLocal.cs" />
+    <Compile Include="DummyKeyStoreLocal.cs" />
+    <Compile Include="DummyKeyStore.cs" />
     <Compile Include="KeyGeneration.cs" />
     <Compile Include="NotificationProcessingSettings.cs" />
     <Compile Include="NotificationProcessingSettingsLocal.cs" />
@@ -109,6 +111,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="SampleNotifications\EncryptedRichNotification.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="SampleNotifications\UnencryptedRichNotification.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

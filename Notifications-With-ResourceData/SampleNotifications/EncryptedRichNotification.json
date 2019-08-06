@@ -1,0 +1,21 @@
+{
+  "value": [
+    {
+      "subscriptionId": "76222963-cc7b-42d2-882d-8aaa69cb2ba3",
+      "changeType": "created",
+      "tenantId": "2bcd9dfb-6a66-4236-98f9-e8fe4a675323",
+      "clientState": "bobState",
+      "subscriptionExpirationDateTime": "2019-08-05T23:50:01.8509239+00:00",
+      "resource": "teams('d29828b8-c04d-4e2a-b2f6-07da6982f0f0')/channels('19:f127a8c55ad949d1a238464d22f0f99e@thread.skype')/messages('1565045424600')/replies('1565047490246')",
+      "resourceData": {
+        "id": "1565047490246",
+        "encryptedResourceData": "BLbdhEb4J+/VcD0A/056MS+f6pZyGu3yVcPgIYn8L+U+mG8lkEDSlYOf40vjeGf2R9SDK36rPVP8Mm1C3rg1Yd63VZh+2wJdXAUgv8vqg48BhcZQ32U5mSlvlQO4sfmriZWlz4hYmYeRi65BUxCEn4CxamPNeBHuaRawwiA62eFGEIca1zuetu3sEfNguwAoyRc99PBLX8v5n1EG+ZUg4wyNlMsdwJ2sMYSRah/l6j7kXB/Dz14XIMIYyI4ZiWXLGL97qJRNrtWHfpdrOmOD2E5Yfq71XifV5O/UQkQa58gc1qYniwRUV+k5b7naX7q70LPpvUbEM2aMTANiydUP2ALDxNsMetdrcivnVQ9sNuH8gY+A2PnakYpQh4xHSm+QR/k5SfpGm3DQRE/A3zNujcET7OxJxCM+o7IymBse0nnr6q/+jK2+G+PKuzvL2t549s76lNaiMUTvGn5JAU4u8JAgbtQtpDWBRE7rLvDfQ6RimuxX3voVelk06aHkG68CNi1X7lgSQy83/o8JGkXOSxXK3N6KtJb4Q/4VZhXYW7nYt8K236NltpuSb1+hbaQbD85l4T+Z56UTUPsccqLG3BbvTGjWoxBByYD/oU/+16iCQGlEouJ6YouEpqq6a7DaTHDs8ik+2o3CllXnplDYpl0XfXQ18c9TJHCDsM+MEUmsNk+MxDX66D2rHr1Lt630CMGegI5zoWhFa9GORSznIBCw+DZc4jTZ+kXuvjtzqgKvMHhmEXfOJ1MF1ccHguGpXQdgOEguPLmTrQmrMgdVUfL9nUT+W/9KJVFlKcWzhQ6YMU7d8Qr9rBYqXmXQ2Dc1eP4qazvjSyUEdUDt72hSvbPxV1tvB0TX8zy20+BXKcoiWuboF4xX4UDTmC1YpG2kvv4d/DjFkgSpb+bf6LzXs5/37v6oq2lfBr2uByxi+0SmotIbm0SaMdZjJy3tiPkNjh1EF1Kmbgrr7OSR6Sw5pQMulqsh8jxPvNE290kWo3C3jdOKpt3Cavggrn3G+J7tt2pQ83yZvyPpkKjDsSRTgJsEGoGQs01SsyXU1t7O1VRsRz9lfRRA4A+GsGOZaCqtkpMlxsg0egmS2M7S7S8IiG7mb3Pn8BUwMkv/GjvpKVU=",
+        "encryptedResourceDataKey": "c2e9L9InnJ5x7H6eusmVrRLfv/JwaTNjbbbVVPaUl05O43OZ1aj8XF9Uwh34OdL2THCYxwToFNzUFtRcAeY6m70aue1hik1eip1bWgPSeb2cKjL4hunJgjGm2nxA+OrPwMixQk6bpS3En0/7zO5+gcUvcnwXORiDShsPllQN7coNhaAKQ88egTLjM7OQIUUzES8fdvCz1+Qcli/Sa4Wf3trmbL6SM9WguA5B1R8i4MPdAlHBwSwAI82P0+D7lDbA7bcKtXeFtyGxMJutUwu6X6YNQ7LOIrZYXwIkD05ehQpVDrzFHcZSjsRdQsEyVfLamcGiLiOBaTiq+Nbb66iJ1A==",
+        "publicEncryptionKeyId": "E96149FC-3B4F-4E0B-ACED-E715D29961FD",
+        "@odata.type": "#Microsoft.Graph.ChatMessage",
+        "@odata.id": "teams('d29828b8-c04d-4e2a-b2f6-07da6982f0f0')/channels('19:f127a8c55ad949d1a238464d22f0f99e@thread.skype')/messages('1565045424600')/replies('1565047490246')"
+      }
+    }
+  ],
+  "validationTokens": [ "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InU0T2ZORlBId0VCb3NIanRyYXVPYlY4NExuWSIsImtpZCI6InU0T2ZORlBId0VCb3NIanRyYXVPYlY4NExuWSJ9.eyJhdWQiOiI4ZTQ2MDY3Ni1hZTNmLTRiMWUtODc5MC1lZTBmYjVkNjE0OGYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8yYmNkOWRmYi02YTY2LTQyMzYtOThmOS1lOGZlNGE2NzUzMjMvIiwiaWF0IjoxNTY1MDQ1MTMwLCJuYmYiOjE1NjUwNDUxMzAsImV4cCI6MTU2NTA3NDIzMCwiYWlvIjoiNDJGZ1lDaFlJdXpmNGJqc2FXamZjOVZUTDRPNEFRPT0iLCJhcHBpZCI6IjBiZjMwZjNiLTRhNTItNDhkZi05YTgyLTIzNDkxMGM0YTA4NiIsImFwcGlkYWNyIjoiMiIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzJiY2Q5ZGZiLTZhNjYtNDIzNi05OGY5LWU4ZmU0YTY3NTMyMy8iLCJ0aWQiOiIyYmNkOWRmYi02YTY2LTQyMzYtOThmOS1lOGZlNGE2NzUzMjMiLCJ1dGkiOiJqaVJPeGlLVTdFZXFidkZwUzBocEFBIiwidmVyIjoiMS4wIn0.oI5qc2fcyr3F6Qe6V9e5PfFBE4I1OvwA6WMgPbVGlHOuEDEgKYe0Fgklvi1Nni45soseXjR-3ibxxjhwphOI0m6CJSWRzcfWhEg-bHiyQvX-ks1x-UnyVsWfHZKiJeE0YvsTxdppJbEjz7T_T3obH51sJrZIYFy9YybKAtwvMeQYzGvHejWt-qf6TpXJqlAnqHlLnhhWZxDQnKFlgZUiRXSwSdJtFWYOEgs80CyqhNBYsk_lVrzJRWKL8qNVCNvbiWpQ06jtw9AQEVkcAgou1v7AZCDt5d8x7VWVeBL5zwR3NLVPXR4jBjXYeP0VPvB44YKbVnBNOmnhYPC79-8CJQ" ]
+}
