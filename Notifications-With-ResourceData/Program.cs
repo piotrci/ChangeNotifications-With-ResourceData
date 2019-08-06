@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using TokenValidation;
 
 namespace DemoApp
 {
@@ -16,7 +17,10 @@ namespace DemoApp
             goto tokens;
 
             tokens:  var p = new NotificationProcessor(System.IO.File.ReadAllText("SampleNotifications/UnencryptedRichNotification.json"));
-            p.ValidateAllTokens();
+            var audiences = new[] { AuthSettings.applicationId };
+            var validator = new JwtTokenValidator(audiences);
+            validator.InitializeOpenIdConnectConfigurationAsync().Wait();
+            p.ValidateAllTokens(validator);
             return;
 
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Graph;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using TokenValidation;
 
 namespace DemoApp
 {
@@ -27,22 +28,14 @@ namespace DemoApp
         }
         private readonly JObject notif;
 
-        public void ValidateAllTokens()
+        public void ValidateAllTokens(JwtTokenValidator validator)
         {
-            int i = 0;
-            var validator = new JwtTokenValidator();
-            foreach (var token in notif[tokens])
+            if (validator == null)
             {
-                ++i;
-                try
-                {
-                    validator.ValidateToken(token.Value<string>());
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException($"Validation token no {i} has failed validation. See inner exception for details.", ex);
-                }
+                throw new ArgumentNullException(nameof(validator));
             }
+
+            validator.ValidateAllTokens(notif[tokens].Values<string>());
         }
     }
 }
