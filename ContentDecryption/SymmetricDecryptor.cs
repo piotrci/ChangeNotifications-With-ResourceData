@@ -16,7 +16,14 @@ namespace ContentDecryption
             using (var aesCrypto = new AesCryptoServiceProvider())
             {
                 aesCrypto.Key = aesKey;
-                aesCrypto.GenerateIV();
+                aesCrypto.Padding = PaddingMode.PKCS7;
+                aesCrypto.Mode = CipherMode.CBC;
+
+                var vectorSize = aesCrypto.BlockSize / 8;
+                byte[] iv = new byte[vectorSize];
+                Array.Copy(aesKey, iv, vectorSize);
+                aesCrypto.IV = iv;
+
                 using (var decryptor = aesCrypto.CreateDecryptor())
                 {
                     using (MemoryStream msDecrypt = new MemoryStream(encryptedPayload))
