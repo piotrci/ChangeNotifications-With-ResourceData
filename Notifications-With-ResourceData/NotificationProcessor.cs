@@ -9,6 +9,8 @@ using Microsoft.Graph;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TokenValidation;
+using ContentDecryption;
+using Microsoft.Identity.Client;
 
 namespace DemoApp
 {
@@ -57,37 +59,14 @@ namespace DemoApp
             string encryptedSymmetricKey = resourceData[symmetricKeyProperty]?.Value<string>() ?? throw new InvalidOperationException("Symmetric key does not exist in the notification payload");
             string encryptedPayload = resourceData[encryptedPayloadProperty]?.Value<string>() ?? throw new InvalidOperationException("Encrypted payload ;sdoes not exist in the notification payload");
 
-            string privateKey = DummyKeyStore.GetPrivateKey(keyId);
-
-            RSACryptoServiceProvider crypto = new RSACryptoServiceProvider();
-            crypto.FromXmlString(privateKey);
-
-            byte[] payload = Convert.FromBase64String(encryptedSymmetricKey);
-
-            var aesKey = crypto.Decrypt(payload, true);
-
-            var symmCrypto = new AesCryptoServiceProvider();
-            symmCrypto.Key = aesKey;
-            symmCrypto.GenerateIV();
-
-            var decryptor = symmCrypto.CreateDecryptor();
+            var symmetricKey = KeyDecryptor.DecryptSymmetricKey(Convert.FromBase64String(encryptedSymmetricKey), keyId);
             string plainText;
-
-            var cipherText = Convert.FromBase64String(encryptedPayload);
-
-            using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+            using (var decryptor = new PayloadDecryptor(symmetricKey))
             {
-                using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
-                {
-                    using (StreamReader srDecrypt = new StreamReader(csDecrypt))
-                    {
-
-                        // Read the decrypted bytes from the decrypting stream
-                        // and place them in a string.
-                        plainText = srDecrypt.ReadToEnd();
-                    }
-                }
+                plainText = decryptor.Decrypt(Convert.FromBase64String(encryptedPayload));
             }
+
+            var d = JObject.Parse(plainText);
 
             throw new NotImplementedException();
         }

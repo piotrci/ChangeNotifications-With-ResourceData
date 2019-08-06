@@ -98,9 +98,6 @@
     <Compile Include="AuthenticationProviders.cs" />
     <Compile Include="AuthSettings.cs" />
     <Compile Include="AuthSettingsLocal.cs" />
-    <Compile Include="DummyKeyStoreLocal.cs" />
-    <Compile Include="DummyKeyStore.cs" />
-    <Compile Include="KeyGeneration.cs" />
     <Compile Include="NotificationProcessingSettings.cs" />
     <Compile Include="NotificationProcessingSettingsLocal.cs" />
     <Compile Include="NotificationProcessor.cs" />
@@ -122,6 +119,10 @@
     <Analyzer Include="packages\AsyncUsageAnalyzers.1.0.0-alpha003\analyzers\dotnet\AsyncUsageAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ContentDecryption\ContentDecryption.csproj">
+      <Project>{6488442b-8f77-4e28-9955-4a1a2cd7b080}</Project>
+      <Name>ContentDecryption</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TokenValidation\TokenValidation.csproj">
       <Project>{5ad4b916-dc55-4560-8fb4-7614b04e3dc1}</Project>
       <Name>TokenValidation</Name>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DemoApp
+namespace ContentDecryption
 {
     static partial class DummyKeyStore
     {
