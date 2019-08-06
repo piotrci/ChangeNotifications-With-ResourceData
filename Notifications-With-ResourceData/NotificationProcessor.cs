@@ -59,12 +59,8 @@ namespace DemoApp
             string encryptedSymmetricKey = resourceData[symmetricKeyProperty]?.Value<string>() ?? throw new InvalidOperationException("Symmetric key does not exist in the notification payload");
             string encryptedPayload = resourceData[encryptedPayloadProperty]?.Value<string>() ?? throw new InvalidOperationException("Encrypted payload ;sdoes not exist in the notification payload");
 
-            var symmetricKey = KeyDecryptor.DecryptSymmetricKey(Convert.FromBase64String(encryptedSymmetricKey), keyId);
-            string plainText;
-            using (var decryptor = new PayloadDecryptor(symmetricKey))
-            {
-                plainText = decryptor.Decrypt(Convert.FromBase64String(encryptedPayload));
-            }
+            var symmetricKey = AsymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedSymmetricKey), keyId);
+            string plainText = SymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedPayload), symmetricKey);
 
             var d = JObject.Parse(plainText);
 

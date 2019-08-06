@@ -9,17 +9,27 @@ using System.Threading.Tasks;
 
 namespace ContentDecryption
 {
-    public static class KeyDecryptor
+    public static class AsymmetricDecryptor
     {
-        static KeyDecryptor()
+        static AsymmetricDecryptor()
         {
             NameValueCollection cacheConfig = new NameValueCollection();
             cacheConfig.Add("cacheMemoryLimitMegabytes", "2");
             rsaProviderCache = new MemoryCache("rsaProviderCache", cacheConfig);
         }
         private static readonly MemoryCache rsaProviderCache;
-        public static byte[] DecryptSymmetricKey(byte[] encryptedSymmetricKey, string privateKeyId)
+        public static byte[] Decrypt(byte[] encryptedSymmetricKey, string privateKeyId)
         {
+            if (encryptedSymmetricKey == null)
+            {
+                throw new ArgumentNullException(nameof(encryptedSymmetricKey));
+            }
+
+            if (privateKeyId == null)
+            {
+                throw new ArgumentNullException(nameof(privateKeyId));
+            }
+
             var crypto = GetProvider(privateKeyId);
             return crypto.Decrypt(encryptedSymmetricKey, true);
         }
@@ -43,7 +53,11 @@ namespace ContentDecryption
         }
         private static void DisposeRemovedProvider(CacheEntryRemovedArguments args)
         {
-            ((RSACryptoServiceProvider)args.CacheItem.Value).Dispose();
+            var provider = args.CacheItem.Value as RSACryptoServiceProvider;
+            if (provider != null)
+            {
+                provider.Dispose();
+            }
         }
     }
 }

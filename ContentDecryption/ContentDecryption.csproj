@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KeyDecryptor.cs" />
-    <Compile Include="PayloadDecryptor.cs" />
+    <Compile Include="AsymmetricDecryptor.cs" />
+    <Compile Include="SymmetricDecryptor.cs" />
     <Compile Include="DummyKeyStore.cs" />
     <Compile Include="DummyKeyStoreLocal.cs" />
     <Compile Include="KeyGeneration.cs" />
