@@ -62,9 +62,7 @@ namespace DemoApp
             var symmetricKey = AsymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedSymmetricKey), keyId);
             string plainText = SymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedPayload), symmetricKey);
 
-            var d = JObject.Parse(plainText);
-
-            throw new NotImplementedException();
+            return plainText;
         }
     }
 }
