@@ -14,9 +14,11 @@ namespace DemoApp
     {
         static void Main(string[] args)
         {
-            //goto subscription;
-            var notifications = NotificationDownloader.GetNotificationsFromBlobs("https://testfunctionsfo97a4.blob.core.windows.net/notificationblobs?st=2019-08-06T22%3A40%3A12Z&se=2019-09-07T18%3A40%3A00Z&sp=rl&sv=2018-03-28&sr=c&sig=kz5ah8ziqBKn6oyX1FoNihfCSM1fVAc1qvvzwsvjA4c%3D",
-                DateTime.Parse("2019-08-04"));
+            const string queueSasKey = "https://testfunctionsfo97a4.queue.core.windows.net/notifqueue?st=2019-08-06T02%3A01%3A00Z&se=2019-08-08T02%3A01%3A48Z&sp=rp&sv=2018-03-28&sig=LV4IPV0xwvX7gSl%2FYrYefofyC1UNb9I9yVIANcxJsfU%3D";
+            const string blobSasKey = "https://testfunctionsfo97a4.blob.core.windows.net/notificationblobs?st=2019-08-06T22%3A40%3A12Z&se=2019-09-07T18%3A40%3A00Z&sp=rl&sv=2018-03-28&sr=c&sig=kz5ah8ziqBKn6oyX1FoNihfCSM1fVAc1qvvzwsvjA4c%3D";
+            goto subscription;
+            var notifications = NotificationDownloader.GetNotificationsFromQueue(queueSasKey);
+            //var notifications = NotificationDownloader.GetNotificationsFromBlobs(blobSasKey, DateTime.Parse("2019-08-04"));
 
             var audiences = new[] { AuthSettings.applicationId };
             var validator = new JwtTokenValidator(audiences);
@@ -28,10 +30,6 @@ namespace DemoApp
                 //p.ValidateAllTokens(validator);
 
                 var results = p.DecryptAllNotifications().ToArray();
-
-                
-                
-
             }
 
 
