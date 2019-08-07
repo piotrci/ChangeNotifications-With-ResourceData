@@ -64,20 +64,13 @@ namespace TokenValidation
                 throw new InvalidOperationException($"You must initalize the Open ID Connect config before validating any tokens. Call {nameof(this.InitializeOpenIdConnectConfiguration)} or {nameof(this.InitializeOpenIdConnectConfiguration)} first.");
             }
             var jwtH = new JwtSecurityTokenHandler();
-            var tokenIssuer = jwtH.ReadJwtToken(tokenBlob).Issuer;
-
-            //if (!tokenIssuer.StartsWith(this.issuerRoot, StringComparison.Ordinal))
-            if(Uri.Compare(this.issuerTemplate, new Uri(tokenIssuer), UriComponents.HostAndPort | UriComponents.Scheme, UriFormat.Unescaped, StringComparison.Ordinal) != 0)
-            {
-                throw new UnexpectedIssuerException($"Token issuer is unexpected: {tokenIssuer}. Should start with: {this.issuerTemplate}");
-            }
 
             var validationParams = new TokenValidationParameters
             {
-                ValidIssuer = tokenIssuer,
                 ValidAudiences = this.audiences,
                 IssuerSigningKeys = this.signingKeys,
-                ValidateIssuerSigningKey = true
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = false
             };
 
             // check overall token validation, using the SDK
