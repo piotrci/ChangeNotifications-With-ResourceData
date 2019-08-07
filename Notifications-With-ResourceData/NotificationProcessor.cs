@@ -47,7 +47,13 @@ namespace DemoApp
             var x = DecryptResourceData(notif[items].First);
         }
 
-        public string DecryptResourceData(JToken item)
+        public IEnumerable<NotificationItem> DecryptAllNotifications()
+        {
+            return notif[items].Select(i => new NotificationItem(i, DecryptResourceData(i)));
+        }
+
+
+        public JToken DecryptResourceData(JToken item)
         {
             const string keyIdProperty = "publicEncryptionKeyId";
             const string symmetricKeyProperty = "encryptedResourceDataKey";
@@ -62,7 +68,18 @@ namespace DemoApp
             var symmetricKey = AsymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedSymmetricKey), keyId);
             string plainText = SymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedPayload), symmetricKey);
 
-            return plainText;
+            return JToken.Parse(plainText);
         }
+    }
+    public struct NotificationItem
+    {
+        public NotificationItem(JToken originalNotification, JToken decryptedContent)
+        {
+            OriginalNotification = originalNotification;
+            DecryptedContent = decryptedContent;
+        }
+
+        public JToken OriginalNotification { get; }
+        public JToken DecryptedContent { get; }
     }
 }

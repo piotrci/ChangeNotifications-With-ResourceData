@@ -15,17 +15,28 @@ namespace DemoApp
         static void Main(string[] args)
         {
             //goto subscription;
-            goto tokens;
-
-
-        tokens: var p = new NotificationProcessor(System.IO.File.ReadAllText("SampleNotifications/EncryptedRichNotification.json"));
-
-            p.TestDecrypt();
+            var notifications = NotificationDownloader.GetNotificationsFromBlobs("https://testfunctionsfo97a4.blob.core.windows.net/notificationblobs?st=2019-08-06T22%3A40%3A12Z&se=2019-09-07T18%3A40%3A00Z&sp=rl&sv=2018-03-28&sr=c&sig=kz5ah8ziqBKn6oyX1FoNihfCSM1fVAc1qvvzwsvjA4c%3D",
+                DateTime.Parse("2019-08-04"));
 
             var audiences = new[] { AuthSettings.applicationId };
             var validator = new JwtTokenValidator(audiences);
             validator.InitializeOpenIdConnectConfigurationAsync().Wait();
-            p.ValidateAllTokens(validator);
+
+            foreach (var notifContent in notifications)
+            {
+                var p = new NotificationProcessor(notifContent);
+                //p.ValidateAllTokens(validator);
+
+                var results = p.DecryptAllNotifications().ToArray();
+
+                
+                
+
+            }
+
+
+
+            
             return;
 
 
