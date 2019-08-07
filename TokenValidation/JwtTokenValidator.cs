@@ -29,7 +29,6 @@ namespace TokenValidation
         public void InitializeOpenIdConnectConfiguration(OpenIdConnectConfiguration openIdConfig)
         {
             this.signingKeys = openIdConfig.SigningKeys;
-            this.issuerTemplate = new Uri(openIdConfig.Issuer);
             this.configInitialized = true;
         }
         private static async Task<OpenIdConnectConfiguration> GetCommonOpenIdConfig()
@@ -40,7 +39,6 @@ namespace TokenValidation
         }
         private readonly IEnumerable<string> audiences;
         private ICollection<SecurityKey> signingKeys;
-        private Uri issuerTemplate;
         private bool configInitialized;
 
 
