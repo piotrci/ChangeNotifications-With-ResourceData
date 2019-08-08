@@ -31,7 +31,7 @@ namespace ContentDecryption
             }
 
             var crypto = GetProvider(privateKeyId);
-            return crypto.Decrypt(encryptedSymmetricKey, true);
+            return crypto.Decrypt(encryptedSymmetricKey, fOAEP: true);
         }
         private static RSACryptoServiceProvider GetProvider(string privateKeyId)
         {

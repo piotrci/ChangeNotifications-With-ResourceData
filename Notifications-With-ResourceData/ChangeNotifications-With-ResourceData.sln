@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenValidation", "..\Token
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentDecryption", "..\ContentDecryption\ContentDecryption.csproj", "{6488442B-8F77-4E28-9955-4A1A2CD7B080}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificateUnitTests", "..\CertificateUnitTests\CertificateUnitTests.csproj", "{D45700ED-DF95-4300-A59E-8490032B1BEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6488442B-8F77-4E28-9955-4A1A2CD7B080}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6488442B-8F77-4E28-9955-4A1A2CD7B080}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6488442B-8F77-4E28-9955-4A1A2CD7B080}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D45700ED-DF95-4300-A59E-8490032B1BEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D45700ED-DF95-4300-A59E-8490032B1BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D45700ED-DF95-4300-A59E-8490032B1BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D45700ED-DF95-4300-A59E-8490032B1BEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
