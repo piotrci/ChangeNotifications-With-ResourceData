@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Text;
+using System.Threading;
 
 namespace CertificateUnitTests
 {
@@ -16,9 +17,10 @@ namespace CertificateUnitTests
         {
             var certFiles = new[]
             {
+                "CertFiles/KeyVaultDERCert.crt",
+                "CertFiles/PEMCertAsPFXPem.pem",
                 "CertFiles/KeyVaultCerFormat.cer",
                 "CertFiles/PEMCertAsCer.cer",
-                "CertFiles/PEMCertAsPFXPem.pem"
             };
             foreach (var certFile in certFiles)
             {  
@@ -39,8 +41,6 @@ namespace CertificateUnitTests
                 new Random().NextBytes(toEncrypt);
                 var encryption = p.Encrypt(toEncrypt, true);
             }
-            
-            return;
         }
         const string certPropName = "cert";
         static private JObject LoadCertIntoJson(string filePath)
@@ -50,7 +50,22 @@ namespace CertificateUnitTests
 
         static private string LoadCertAsText(string filePath)
         {
-            return File.ReadAllText(filePath);
+            var contentString = File.ReadAllText(filePath);
+            try
+            {
+                // check if a PEM
+                var header = "-----";
+                if (contentString.StartsWith(header))
+                    return contentString;
+                Convert.FromBase64String(contentString);
+            }
+            catch (FormatException)
+            {
+                //must be a non-base64 format, so just read the bytes and encode
+                var bytes = File.ReadAllBytes(filePath);
+                contentString = Convert.ToBase64String(bytes);
+            }
+            return contentString;
         }
         static private JObject MakeJsonWithCert(string cert)
         {
