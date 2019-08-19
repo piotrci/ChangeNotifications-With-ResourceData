@@ -47,8 +47,8 @@ namespace DemoApp
                 {
                     throw new ArgumentNullException(nameof(encryptionKeyId), $"{nameof(encryptionKeyId)} must be set when {includeProperties} is set to true.");
                 }
-                sub.AdditionalData.Add("publicEncryptionKey", encryptionKey);
-                sub.AdditionalData.Add("publicEncryptionKeyId", encryptionKeyId);
+                sub.AdditionalData.Add("encryptionCertificate", encryptionKey);
+                sub.AdditionalData.Add("encryptionCertificateId", encryptionKeyId);
             }
             sub.ChangeType = changeType;
             sub.NotificationUrl = this.notificationUrl;
