@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.Caching;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,9 +44,11 @@ namespace ContentDecryption
                     RemovedCallback = DisposeRemovedProvider,
                     SlidingExpiration = TimeSpan.FromMinutes(5)
                 };
-                string privateKey = DummyKeyStore.GetPrivateKey(privateKeyId);
-                RSACryptoServiceProvider newProvider = new RSACryptoServiceProvider();
-                newProvider.FromXmlString(privateKey);
+                var privateKey = Convert.FromBase64String(DummyKeyStore.GetPrivateKeyLocal(privateKeyId));
+                var certificate = new X509Certificate2();
+                certificate.Import(privateKey);
+
+                RSACryptoServiceProvider newProvider = (RSACryptoServiceProvider)certificate.PrivateKey;
 
                 provider = (RSACryptoServiceProvider)rsaProviderCache.AddOrGetExisting(privateKeyId, newProvider, policy) ?? newProvider;
             }

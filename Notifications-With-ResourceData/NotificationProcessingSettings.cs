@@ -17,8 +17,7 @@ namespace DemoApp
     {
         public static readonly string notificationUrl = null;             // HTTPS endpoint where resource change notifications should be sent
         public static readonly string lifecycleNotificationUrl = null;    // HTTPS endpoint where subscription lifecycle notifications should be sent
-        public static readonly string publicEncryptionKey = null;
-        public static readonly string publicEncryptionKeyId = null;
+        public static readonly string encryptionCertificateId = null;
 
         private static bool ValidateHttpsUrl(string url)
         {
