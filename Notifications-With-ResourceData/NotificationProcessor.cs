@@ -55,17 +55,20 @@ namespace DemoApp
 
         public JToken DecryptResourceData(JToken item)
         {
-            const string keyIdProperty = "publicEncryptionKeyId";
-            const string symmetricKeyProperty = "encryptedResourceDataKey";
-            const string encryptedPayloadProperty = "encryptedResourceData";
+            const string encryptedContentProperty = "encryptedContent";
+            const string certificateIdProperty = "encryptionCertificateId";
+            const string symmetricKeyProperty = "dataKey";
+            const string encryptedPayloadProperty = "data";
+            const string signatureProperty = "dataSignature";
 
-            var resourceData = item["resourceData"];
+            var encryptedContent = item[encryptedContentProperty];
 
-            string keyId = resourceData[keyIdProperty]?.Value<string>() ?? throw new InvalidOperationException("Encryption key id does not exist in the notification payload");
-            string encryptedSymmetricKey = resourceData[symmetricKeyProperty]?.Value<string>() ?? throw new InvalidOperationException("Symmetric key does not exist in the notification payload");
-            string encryptedPayload = resourceData[encryptedPayloadProperty]?.Value<string>() ?? throw new InvalidOperationException("Encrypted payload ;sdoes not exist in the notification payload");
+            string certificateId = encryptedContent[certificateIdProperty]?.Value<string>() ?? throw new InvalidOperationException("Encryption key id does not exist in the notification payload");
+            string encryptedSymmetricKey = encryptedContent[symmetricKeyProperty]?.Value<string>() ?? throw new InvalidOperationException("Symmetric key does not exist in the notification payload");
+            string encryptedPayload = encryptedContent[encryptedPayloadProperty]?.Value<string>() ?? throw new InvalidOperationException("Encrypted payload ;sdoes not exist in the notification payload");
+            string hashMac = encryptedContent[signatureProperty]?.Value<string>() ?? throw new InvalidOperationException("Encrypted signature does not exist in the notification payload");
 
-            var symmetricKey = AsymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedSymmetricKey), keyId);
+            var symmetricKey = AsymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedSymmetricKey), certificateId);
             string plainText = SymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedPayload), symmetricKey);
 
             return JToken.Parse(plainText);
