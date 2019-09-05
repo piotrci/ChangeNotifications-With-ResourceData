@@ -68,8 +68,17 @@ namespace DemoApp
             string encryptedPayload = encryptedContent[encryptedPayloadProperty]?.Value<string>() ?? throw new InvalidOperationException("Encrypted payload ;sdoes not exist in the notification payload");
             string hashMac = encryptedContent[signatureProperty]?.Value<string>() ?? throw new InvalidOperationException("Encrypted signature does not exist in the notification payload");
 
+            var payloadBytes = Convert.FromBase64String(encryptedPayload);
+            var signatureBytes = Convert.FromBase64String(hashMac);
+
+            // descrypt the symetric key
             var symmetricKey = AsymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedSymmetricKey), certificateId);
-            string plainText = SymmetricDecryptor.Decrypt(Convert.FromBase64String(encryptedPayload), symmetricKey);
+
+            // verify signature using the symmetric key
+            SymmetricDecryptor.VerifyHMACSignature(payloadBytes, symmetricKey, signatureBytes);
+            
+            // decrypt payload using symmetric key
+            string plainText = SymmetricDecryptor.Decrypt(payloadBytes, symmetricKey);
 
             return JToken.Parse(plainText);
         }

@@ -39,12 +39,15 @@ namespace ContentDecryption
                 }
             }
         }
-        public static bool VerifyHMACSignature(byte[] encryptedPayload, byte[] key, byte[] expectedSignature)
+        public static void VerifyHMACSignature(byte[] encryptedPayload, byte[] key, byte[] expectedSignature)
         {
             using (HMACSHA256 hmac = new HMACSHA256(key))
             {
                 byte[] actualSignature = hmac.ComputeHash(encryptedPayload);
-                return actualSignature.SequenceEqual(expectedSignature);
+                if (!actualSignature.SequenceEqual(expectedSignature))
+                {
+                    throw new InvalidDataException("Data signature does not match the encrypted payload.");
+                }
             }
         }
     }
