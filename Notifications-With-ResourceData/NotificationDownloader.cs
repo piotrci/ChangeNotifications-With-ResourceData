@@ -31,7 +31,7 @@ namespace DemoApp
             }
         }
 
-        static public IEnumerable<string> GetNotificationsFromQueue(string sasKey, int howMany = int.MaxValue)
+        static public IEnumerable<string> LoopOverNotificationsFromQueue(string sasKey, int howMany = int.MaxValue)
         {
             var queue = new CloudQueue(new Uri(sasKey));
 
@@ -40,7 +40,7 @@ namespace DemoApp
                 var message = queue.GetMessageAsync().Result;
                 if (message == null)
                 {
-                    Thread.Sleep(TimeSpan.FromSeconds(5));
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
                     continue;
                 }
                 queue.DeleteMessageAsync(message).Wait();

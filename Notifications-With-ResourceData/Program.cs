@@ -32,7 +32,8 @@ namespace DemoApp
             var createdSub = subManager.CreateSubscriptionAsync("/teams/allMessages", "created,updated", TimeSpan.FromMinutes(58), "bobState", DummyKeyStore.GetPublicKeyLocal(NotificationProcessingSettings.encryptionCertificateId), NotificationProcessingSettings.encryptionCertificateId, true).Result;
 
             notificationLoop:
-            var notifications = NotificationDownloader.GetNotificationsFromQueue(queueSasKey);
+            Console.WriteLine("Subscription created. Waiting for notifications.");
+            var notifications = NotificationDownloader.LoopOverNotificationsFromQueue(queueSasKey);
             //var notifications = NotificationDownloader.GetNotificationsFromBlobs(blobSasKey, DateTime.Parse("2019-08-04"));
 
             var audiences = new[] { AuthSettings.applicationId };
@@ -45,6 +46,11 @@ namespace DemoApp
                 p.ValidateAllTokens(validator);
 
                 var results = p.DecryptAllNotifications().ToArray();
+                // print portions of the content to console, just for fun
+                foreach (var notif in results)
+                {
+                    PrintContentToConsole(notif);
+                }
             }
             
             return;
@@ -52,6 +58,12 @@ namespace DemoApp
             // set up authentication based on the config specified in AuthSettings.cs (you should have a local git-ignoder AuthSettingsLocal.cs file where you initialize the values
             
             return;
+        }
+
+        private static void PrintContentToConsole(NotificationItem notif)
+        {
+            var content = notif.DecryptedContent["body"]?.Value<string>("content") ?? "<no message>";
+            Console.WriteLine(content);
         }
 
         private static readonly string microsoftGraphV1 = @"https://graph.microsoft.com/v1.0";
