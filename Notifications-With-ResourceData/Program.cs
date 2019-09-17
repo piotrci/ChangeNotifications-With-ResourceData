@@ -54,10 +54,6 @@ namespace DemoApp
             }
             
             return;
-
-            // set up authentication based on the config specified in AuthSettings.cs (you should have a local git-ignoder AuthSettingsLocal.cs file where you initialize the values
-            
-            return;
         }
 
         private static void PrintContentToConsole(NotificationItem notif)
@@ -67,7 +63,7 @@ namespace DemoApp
         }
 
         private static readonly string microsoftGraphV1 = @"https://graph.microsoft.com/v1.0";
-        private static readonly string microsoftGraphCanary = @"https://canary.graph.microsoft.com/testencryptionnotification";
+        private static readonly string microsoftGraphCanary = @"https://canary.graph.microsoft.com/testencryptionnotification3";
         //private static readonly string microsoftGraphCanary = @"https://canary.graph.microsoft.com/beta";
 
         private static GraphServiceClient GetAuthenticatedClient(MyAuthenticationProvider provider)
