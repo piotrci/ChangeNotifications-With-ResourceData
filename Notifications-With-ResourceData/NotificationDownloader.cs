@@ -31,7 +31,7 @@ namespace DemoApp
             }
         }
 
-        static public IEnumerable<string> LoopOverNotificationsFromQueue(string sasKey, int howMany = int.MaxValue)
+        static public IEnumerable<string> LoopOverNotificationsFromQueue(string sasKey, Task messengerTask, int howMany = int.MaxValue)
         {
             var queue = new CloudQueue(new Uri(sasKey));
 
@@ -40,6 +40,10 @@ namespace DemoApp
                 var message = queue.GetMessageAsync().Result;
                 if (message == null)
                 {
+                    if (messengerTask.IsFaulted)
+                    {
+                        throw messengerTask.Exception;
+                    }
                     Thread.Sleep(TimeSpan.FromSeconds(1));
                     continue;
                 }

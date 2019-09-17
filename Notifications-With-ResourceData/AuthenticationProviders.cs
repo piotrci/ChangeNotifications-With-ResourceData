@@ -15,10 +15,16 @@ namespace DemoApp
         private bool isInitialized = false;
         private readonly object initializationLock = new object();
 
-        protected abstract string InitializeAppAndGetFirstToken();
-        protected abstract Task<string> GetTokenSilentlyAsync();
+        protected abstract string InitializeAppAndGetFirstToken(string[] scopes);
+        protected abstract Task<string> GetTokenSilentlyAsync(string[] scopes);
+
+        private readonly string[] scopes;
 
         async public Task<string> GetAccessTokenAsync()
+        {
+            return await this.GetAccessTokenAsync(AuthSettings.scopes);
+        }
+        async public Task<string> GetAccessTokenAsync(string[] scopes)
         {
             if (!this.isInitialized)
             {
@@ -27,26 +33,26 @@ namespace DemoApp
                     if (!this.isInitialized)
                     {
                         this.isInitialized = true;
-                        return this.InitializeAppAndGetFirstToken();
+                        return this.InitializeAppAndGetFirstToken(scopes);
                     }
                 }
             }
-            return await this.GetTokenSilentlyAsync();
+            return await this.GetTokenSilentlyAsync(scopes);
         }
     }
     class UserAuthenticationProvider : MyAuthenticationProvider
     {
         private IPublicClientApplication app;
         private IAccount account;
-        async protected override Task<string> GetTokenSilentlyAsync()
+        async protected override Task<string> GetTokenSilentlyAsync(string[] scopes)
         {
-            return (await this.app.AcquireTokenSilent(AuthSettings.scopes, this.account).ExecuteAsync()).AccessToken;
+            return (await this.app.AcquireTokenSilent(scopes, this.account).ExecuteAsync()).AccessToken;
         }
 
-        protected override string InitializeAppAndGetFirstToken()
+        protected override string InitializeAppAndGetFirstToken(string[] scopes)
         {
-            this.app = PublicClientApplicationBuilder.Create(AuthSettings.applicationId).Build();
-            var authResult = this.app.AcquireTokenInteractive(AuthSettings.scopes).ExecuteAsync().Result;
+            this.app = PublicClientApplicationBuilder.Create(AuthSettings.applicationId).WithRedirectUri(AuthSettings.redirectUri).Build();
+            var authResult = this.app.AcquireTokenInteractive(scopes).ExecuteAsync().Result;
             this.account = authResult.Account;
             return authResult.AccessToken;
         }
@@ -58,16 +64,16 @@ namespace DemoApp
         private readonly static string[] scopes = new[] { $"{graphCanary}/.default" };
         private IConfidentialClientApplication app;
 
-        async protected override Task<string> GetTokenSilentlyAsync()
+        async protected override Task<string> GetTokenSilentlyAsync(string[] scopes)
         {
-            return (await this.app.AcquireTokenForClient(scopes).ExecuteAsync()).AccessToken;
+            return (await this.app.AcquireTokenForClient(AppOnlyAuthenticationProvider.scopes).ExecuteAsync()).AccessToken;
         }
 
-        protected override string InitializeAppAndGetFirstToken()
+        protected override string InitializeAppAndGetFirstToken(string[] scopes)
         {
             this.app = ConfidentialClientApplicationBuilder.Create(AuthSettings.applicationId).WithAuthority($"https://login.microsoftonline.com/{AuthSettings.tenantId}").WithClientSecret(AuthSettings.secretClientCredentials).Build();
             //this.app = new ConfidentialClientApplication(AuthSettings.applicationId, $"https://login.microsoftonline.com/{AuthSettings.tenantId}", "https://microsoft.com", AuthSettings.secretClientCredentials, null, new TokenCache());
-            return GetTokenSilentlyAsync().Result;
+            return GetTokenSilentlyAsync(scopes).Result;
         }
     }
 }

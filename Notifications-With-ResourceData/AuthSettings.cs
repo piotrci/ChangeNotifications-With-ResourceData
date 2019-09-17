@@ -18,5 +18,6 @@
         public static readonly string[] scopes = null;                              // if the app uses delegated (user) permissions, list the scopes it needs to request here. otherwise, leave null
         public static readonly string secretClientCredentials = null;     // initialize your secret client credentials. Certificate or "app password"
         public static readonly string tenantId = null;                                // the Guid ID of the tenant against which you will execute Graph calls.
+        public static readonly string redirectUri = null;
     }
 }

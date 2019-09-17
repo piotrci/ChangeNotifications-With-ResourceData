@@ -104,6 +104,7 @@
     <Compile Include="AuthenticationProviders.cs" />
     <Compile Include="AuthSettings.cs" />
     <Compile Include="AuthSettingsLocal.cs" />
+    <Compile Include="MessageManager.cs" />
     <Compile Include="NotificationDownloader.cs" />
     <Compile Include="NotificationProcessingSettings.cs" />
     <Compile Include="NotificationProcessingSettingsLocal.cs" />
