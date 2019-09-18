@@ -19,7 +19,7 @@ namespace ContentDecryption
                 aesCrypto.Padding = PaddingMode.PKCS7;
                 aesCrypto.Mode = CipherMode.CBC;
 
-                var vectorSize = aesCrypto.BlockSize / 8;
+                int vectorSize = 16;
                 byte[] iv = new byte[vectorSize];
                 Array.Copy(aesKey, iv, vectorSize);
                 aesCrypto.IV = iv;
