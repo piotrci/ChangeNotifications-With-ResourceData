@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using TokenValidation;
 using ContentDecryption;
 using Microsoft.Identity.Client;
+using System.Collections;
 
 namespace DemoApp
 {
@@ -42,16 +43,29 @@ namespace DemoApp
             validator.ValidateAllTokens(notif[tokens].Values<string>());
         }
 
-        public void TestDecrypt()
+        /// <summary>
+        /// Looks for lifecycle event notifications that require re-authorization of a subscription
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetSubscriptionsToReauthorize()
         {
-            var x = DecryptResourceData(notif[items].First);
+            return notif[items]
+                .Where(i => IsLifeCycleNotification(i, out string type) && String.Equals(type, "reauthorizationRequired", StringComparison.OrdinalIgnoreCase))
+                .Select(i => i["subscriptionId"].Value<string>()).Distinct();
+        }
+
+        private static bool IsLifeCycleNotification(JToken notif, out string lifecycleEventType)
+        {
+            lifecycleEventType = notif["lifecycleEvent]"]?.Value<string>();
+            return lifecycleEventType != null;
         }
 
         public IEnumerable<NotificationItem> DecryptAllNotifications()
         {
-            return notif[items].Select(i => new NotificationItem(i, DecryptResourceData(i)));
+            return notif[items]
+                .Where(i => !IsLifeCycleNotification(i, out string type))
+                .Select(i => new NotificationItem(i, DecryptResourceData(i)));
         }
-
 
         public JToken DecryptResourceData(JToken item)
         {

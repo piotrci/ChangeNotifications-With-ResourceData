@@ -62,6 +62,13 @@ namespace DemoApp
             return await CreateSubscriptionAsync(graphResource, changeType, TimeSpan.FromDays(2), clientState, null, null);
         }
 
+        async public Task<Subscription> RenewSubscriptionAsync(string subscriptionId, TimeSpan duration)
+        {
+            var sub = new Subscription();
+            sub.ExpirationDateTime = DateTime.UtcNow + duration;
+            return await client.Subscriptions[subscriptionId].Request().UpdateAsync(sub);
+        }
+
         async public Task DeleteAllSubscriptionsAsync()
         {
             var subs = await GetAllSubscriptionsAsync();

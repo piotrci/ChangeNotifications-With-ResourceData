@@ -50,6 +50,12 @@ namespace DemoApp
                 var p = new NotificationProcessor(notifContent);
                 p.ValidateAllTokens(validator);
 
+                // renew any subscriptions that require re-authorization
+                foreach (var subId in p.GetSubscriptionsToReauthorize())
+                {
+                    subManager.RenewSubscriptionAsync(subId, TimeSpan.FromMinutes(58)).Wait();
+                }
+
                 var results = p.DecryptAllNotifications().ToArray();
                 // print portions of the content to console, just for fun
                 foreach (var notif in results)
