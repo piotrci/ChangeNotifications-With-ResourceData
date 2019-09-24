@@ -73,7 +73,7 @@ namespace DemoApp
         }
 
         private static readonly string microsoftGraphV1 = @"https://graph.microsoft.com/v1.0";
-        private static readonly string microsoftGraphCanary = @"https://canary.graph.microsoft.com/testencryptionnotification3";
+        private static readonly string microsoftGraphCanary = @"https://canary.graph.microsoft.com/testprodbetaEncryptionNotification6/";
         //private static readonly string microsoftGraphCanary = @"https://canary.graph.microsoft.com/beta";
 
         private static GraphServiceClient GetAuthenticatedClient(MyAuthenticationProvider provider)

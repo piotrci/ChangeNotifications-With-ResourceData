@@ -31,21 +31,21 @@ namespace DemoApp
             this.notificationUrl = notificationUrl;
             this.lifeCycleNotificationUrl = lifeCycleNotificationUrl;
         }
-        async public Task<Subscription> CreateSubscriptionAsync(string graphResource, string changeType, TimeSpan duration, string clientState, string encryptionKey, string encryptionKeyId, bool includeProperties = false)
+        async public Task<Subscription> CreateSubscriptionAsync(string graphResource, string changeType, TimeSpan duration, string clientState, string encryptionKey, string encryptionKeyId, bool includeResourceData = false)
         {
             var sub = new Subscription();
             sub.AdditionalData = new Dictionary<string, object>();
             sub.AdditionalData.Add("lifecycleNotificationUrl", this.lifeCycleNotificationUrl);
-            if (includeProperties)
+            if (includeResourceData)
             {
-                sub.AdditionalData.Add("includeProperties", includeProperties);
+                sub.AdditionalData.Add("includeResourceData", includeResourceData);
                 if (String.IsNullOrEmpty(encryptionKey))
                 {
-                    throw new ArgumentNullException(nameof(encryptionKey), $"{nameof(encryptionKey)} must be set when {includeProperties} is set to true.");
+                    throw new ArgumentNullException(nameof(encryptionKey), $"{nameof(encryptionKey)} must be set when {includeResourceData} is set to true.");
                 }
                 if (String.IsNullOrEmpty(encryptionKeyId))
                 {
-                    throw new ArgumentNullException(nameof(encryptionKeyId), $"{nameof(encryptionKeyId)} must be set when {includeProperties} is set to true.");
+                    throw new ArgumentNullException(nameof(encryptionKeyId), $"{nameof(encryptionKeyId)} must be set when {includeResourceData} is set to true.");
                 }
                 sub.AdditionalData.Add("encryptionCertificate", encryptionKey);
                 sub.AdditionalData.Add("encryptionCertificateId", encryptionKeyId);
